@@ -1,0 +1,15 @@
+server:
+  port: 8086
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://49.233.86.83:3306/ourblog?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+  jackson:
+    default-property-inclusion: non_null
+mybatis:
+  type-aliases-package: com.example.blogserver.entity
+  mapper-locations: classpath:dao/*Mapper.xml
+  configuration:
+      log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
