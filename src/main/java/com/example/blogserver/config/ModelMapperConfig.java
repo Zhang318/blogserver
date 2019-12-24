@@ -16,7 +16,7 @@ public class ModelMapperConfig {
     public ModelMapper modelMapper() {
         final ModelMapper modelMapper = new ModelMapper();
         /**
-         * 完全匹配，不完全不配不建议使用
+         * 完全匹配，不完全匹配不建议使用
          */
         modelMapper.getConfiguration().setFullTypeMatchingRequired(true);
         /**
