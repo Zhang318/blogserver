@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.blogserver.dao.BlTableAnnounceMapper">
+  <resultMap id="BaseResultMap" type="com.example.blogserver.model.entity.BlTableAnnounce">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="aid" jdbcType="VARCHAR" property="aid" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="publish_time" jdbcType="TIMESTAMP" property="publishTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.example.blogserver.model.entity.BlTableAnnounce">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, aid, title, publish_time
+  </sql>
+  <sql id="Blob_Column_List">
+    content
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from bl_table_announce
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from bl_table_announce
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.blogserver.model.entity.BlTableAnnounce">
+    insert into bl_table_announce (id, aid, title, 
+      publish_time, content)
+    values (#{id,jdbcType=VARCHAR}, #{aid,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{publishTime,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.blogserver.model.entity.BlTableAnnounce">
+    insert into bl_table_announce
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="aid != null">
+        aid,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="publishTime != null">
+        publish_time,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="aid != null">
+        #{aid,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="publishTime != null">
+        #{publishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.blogserver.model.entity.BlTableAnnounce">
+    update bl_table_announce
+    <set>
+      <if test="aid != null">
+        aid = #{aid,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="publishTime != null">
+        publish_time = #{publishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.example.blogserver.model.entity.BlTableAnnounce">
+    update bl_table_announce
+    set aid = #{aid,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      publish_time = #{publishTime,jdbcType=TIMESTAMP},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.blogserver.model.entity.BlTableAnnounce">
+    update bl_table_announce
+    set aid = #{aid,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      publish_time = #{publishTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -25,7 +25,7 @@ spring:
         max-file-size: -1    #设置单个文件的最大值
         max-request-size: -1  #设置单次请求的所有文件的最大值
 mybatis:
-  type-aliases-package: com.example.blogserver.entity
+  type-aliases-package: com.example.blogserver.model.entity
   mapper-locations: classpath:dao/*Mapper.xml
   configuration:
       log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
