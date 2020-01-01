@@ -3,29 +3,32 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://49.233.86.83:3306/ourblog?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&serverTimezone=GMT%2B8
+    url: jdbc:mysql://49.233.86.83:3306/db_uml?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&serverTimezone=GMT%2B8
     username: root
-    password: 123456
+    password: 981213
   jackson:
     default-property-inclusion: non_null
   redis:
-      host: 49.233.86.83
-      password: test123
-      database: 0
-      port: 6379
-      jedis:
-        pool:
-          max-active:  -1 #最大连接数
-          max-wait: 10000ms   #最大阻塞等待时间(负数表示没限制)
-          max-idle: 8  #最大空闲
-          min-idle: 0  #最小空闲
-      timeout: 100000
-    servlet:
-      multipart:
-        max-file-size: -1    #设置单个文件的最大值
-        max-request-size: -1  #设置单次请求的所有文件的最大值
+    host: 49.233.86.83
+    password: test123
+    database: 0
+    port: 6379
+    jedis:
+      pool:
+        max-active:  -1 #最大连接数
+        max-wait: 10000ms   #最大阻塞等待时间(负数表示没限制)
+        max-idle: 8  #最大空闲
+        min-idle: 0  #最小空闲
+    timeout: 100000
+  servlet:
+    multipart:
+      max-file-size: -1    #设置单个文件的最大值
+      max-request-size: -1  #设置单次请求的所有文件的最大值
 mybatis:
   type-aliases-package: com.example.blogserver.model.entity
-  mapper-locations: classpath:dao/*Mapper.xml
-  configuration:
-      log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:mapper/*Mapper.xml
+#  configuration:
+#      log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#logging:
+#  level:
+#     com.partybuilding.webserver.dao : debug

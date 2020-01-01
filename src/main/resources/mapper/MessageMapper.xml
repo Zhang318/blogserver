@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.blogserver.dao.MessageMapper">
+  <resultMap id="BaseResultMap" type="com.example.blogserver.model.entity.Message">
+    <id column="message_id" jdbcType="VARCHAR" property="messageId" />
+    <result column="parent_id" jdbcType="VARCHAR" property="parentId" />
+    <result column="uid" jdbcType="VARCHAR" property="uid" />
+    <result column="leave_time" jdbcType="TIMESTAMP" property="leaveTime" />
+    <result column="likes" jdbcType="INTEGER" property="likes" />
+    <result column="visible" jdbcType="INTEGER" property="visible" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.example.blogserver.model.entity.Message">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    message_id, parent_id, uid, leave_time, likes, visible
+  </sql>
+  <sql id="Blob_Column_List">
+    content
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from bl_table_message
+    where message_id = #{messageId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from bl_table_message
+    where message_id = #{messageId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.blogserver.model.entity.Message">
+    insert into bl_table_message (message_id, parent_id, uid, 
+      leave_time, likes, visible, 
+      content)
+    values (#{messageId,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, #{uid,jdbcType=VARCHAR}, 
+      #{leaveTime,jdbcType=TIMESTAMP}, #{likes,jdbcType=INTEGER}, #{visible,jdbcType=INTEGER}, 
+      #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.blogserver.model.entity.Message">
+    insert into bl_table_message
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="messageId != null">
+        message_id,
+      </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="leaveTime != null">
+        leave_time,
+      </if>
+      <if test="likes != null">
+        likes,
+      </if>
+      <if test="visible != null">
+        visible,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="messageId != null">
+        #{messageId,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="leaveTime != null">
+        #{leaveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="likes != null">
+        #{likes,jdbcType=INTEGER},
+      </if>
+      <if test="visible != null">
+        #{visible,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.blogserver.model.entity.Message">
+    update bl_table_message
+    <set>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="leaveTime != null">
+        leave_time = #{leaveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="likes != null">
+        likes = #{likes,jdbcType=INTEGER},
+      </if>
+      <if test="visible != null">
+        visible = #{visible,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where message_id = #{messageId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.example.blogserver.model.entity.Message">
+    update bl_table_message
+    set parent_id = #{parentId,jdbcType=VARCHAR},
+      uid = #{uid,jdbcType=VARCHAR},
+      leave_time = #{leaveTime,jdbcType=TIMESTAMP},
+      likes = #{likes,jdbcType=INTEGER},
+      visible = #{visible,jdbcType=INTEGER},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where message_id = #{messageId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.blogserver.model.entity.Message">
+    update bl_table_message
+    set parent_id = #{parentId,jdbcType=VARCHAR},
+      uid = #{uid,jdbcType=VARCHAR},
+      leave_time = #{leaveTime,jdbcType=TIMESTAMP},
+      likes = #{likes,jdbcType=INTEGER},
+      visible = #{visible,jdbcType=INTEGER}
+    where message_id = #{messageId,jdbcType=VARCHAR}
+  </update>
+</mapper>

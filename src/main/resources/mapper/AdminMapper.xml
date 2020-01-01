@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.blogserver.dao.AdminMapper">
+  <resultMap id="BaseResultMap" type="com.example.blogserver.model.entity.Admin">
+    <id column="aid" jdbcType="VARCHAR" property="aid" />
+    <result column="account" jdbcType="VARCHAR" property="account" />
+    <result column="admin_name" jdbcType="VARCHAR" property="adminName" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="enable" jdbcType="INTEGER" property="enable" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="head_portrait" jdbcType="VARCHAR" property="headPortrait" />
+  </resultMap>
+  <resultMap id="Password" type="com.example.blogserver.model.dto.AccountAndPasswordDto">
+    <result column="password" property="password" jdbcType="VARCHAR"/>
+    <result column="account" property="account" jdbcType="VARCHAR"></result>
+  </resultMap>
+  <sql id="Base_Column_List">
+    aid, account, admin_name, password, sex, age, phone, enable, email, head_portrait
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from bl_table_admin
+    where account = #{account,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByAccount"  resultMap="Password">
+    select password,account from bl_table_admin where account=#{account,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from bl_table_admin
+    where aid = #{aid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.blogserver.model.entity.Admin">
+    insert into bl_table_admin (aid, account, admin_name, 
+      password, sex, age, 
+      phone, enable, email, 
+      head_portrait)
+    values (#{aid,jdbcType=VARCHAR}, #{account,jdbcType=VARCHAR}, #{adminName,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, 
+      #{phone,jdbcType=VARCHAR}, #{enable,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR}, 
+      #{headPortrait,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.blogserver.model.entity.Admin">
+    insert into bl_table_admin
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="aid != null">
+        aid,
+      </if>
+      <if test="account != null">
+        account,
+      </if>
+      <if test="adminName != null">
+        admin_name,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="enable != null">
+        enable,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="headPortrait != null">
+        head_portrait,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="aid != null">
+        #{aid,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null">
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="adminName != null">
+        #{adminName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="enable != null">
+        #{enable,jdbcType=INTEGER},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="headPortrait != null">
+        #{headPortrait,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.blogserver.model.entity.Admin">
+    update bl_table_admin
+    <set>
+      <if test="account != null">
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="adminName != null">
+        admin_name = #{adminName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="enable != null">
+        enable = #{enable,jdbcType=INTEGER},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="headPortrait != null">
+        head_portrait = #{headPortrait,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where aid = #{aid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.blogserver.model.entity.Admin">
+    update bl_table_admin
+    set account = #{account,jdbcType=VARCHAR},
+      admin_name = #{adminName,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      enable = #{enable,jdbcType=INTEGER},
+      email = #{email,jdbcType=VARCHAR},
+      head_portrait = #{headPortrait,jdbcType=VARCHAR}
+    where aid = #{aid,jdbcType=VARCHAR}
+  </update>
+</mapper>
