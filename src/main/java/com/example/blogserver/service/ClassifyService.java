@@ -1,26 +1,23 @@
-package com.example.blogserver.dao;
-
+package com.example.blogserver.service;
 
 import com.example.blogserver.model.entity.Classify;
-import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Mapper
-@Repository
-public interface ClassifyMapper {
+/**
+ * @author 张鑫
+ * @date 2020/1/2 2:56
+ * @description
+ */
+public interface ClassifyService {
     int deleteByPrimaryKey(String categoryId);
 
-    int insert(Classify record);
 
     int insertSelective(Classify record);
 
     Classify selectByPrimaryKey(String categoryId);
 
     int updateByPrimaryKeySelective(Classify record);
-
-    int updateByPrimaryKey(Classify record);
 
     List<Classify> getAllList();
 }

@@ -3,7 +3,7 @@ package com.example.blogserver.model.entity;
 public class Tag {
     private String tagId;
 
-    private String tagname;
+    private String tagName;
 
     public String getTagId() {
         return tagId;
@@ -13,11 +13,11 @@ public class Tag {
         this.tagId = tagId == null ? null : tagId.trim();
     }
 
-    public String getTagname() {
-        return tagname;
+    public String getTagName() {
+        return tagName;
     }
 
-    public void setTagname(String tagname) {
-        this.tagname = tagname == null ? null : tagname.trim();
+    public void setTagName(String tagName) {
+        this.tagName = tagName;
     }
 }

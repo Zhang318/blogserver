@@ -3,7 +3,7 @@
 <mapper namespace="com.example.blogserver.dao.TagMapper">
   <resultMap id="BaseResultMap" type="com.example.blogserver.model.entity.Tag">
     <id column="tag_id" jdbcType="VARCHAR" property="tagId" />
-    <result column="tagname" jdbcType="VARCHAR" property="tagname" />
+    <result column="tagname" jdbcType="VARCHAR" property="tagName" />
   </resultMap>
   <sql id="Base_Column_List">
     tag_id, tagname
@@ -13,6 +13,11 @@
     <include refid="Base_Column_List" />
     from bl_table_tag
     where tag_id = #{tagId,jdbcType=VARCHAR}
+  </select>
+  <select id="getAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from bl_table_tag
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from bl_table_tag
